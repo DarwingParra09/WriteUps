@@ -1,7 +1,7 @@
 ## *RECONOCIMIENTO*
 Como en todas las maquinas a realizar comenzamos con un escaneo de red para encontrar nuestra maquina a atacar, con el comando netdiscover buscaré la IP y comenzar a buscar información relevante de la maquina
 
-![alt text](image/image/agent-0.png)
+![alt text](image/agent-0.png)
 
 Ya encontrada la IP a auditar comenzaré con un escaneo de puertos en nmap para determinar que puertos pueden llegar a ser útiles dentro del ataque
 

@@ -167,8 +167,21 @@
   },
   "active": "090ab04d318501ce",
   "lastOpenFiles": [
-    "VulnHub/AGENT.md",
+    "HTB/LinkVortex.md",
+    "HTB/image/linkvortex-7.png",
+    "HTB/image/linvortex-21.png",
+    "HTB/image/linvortex-20.png",
+    "HTB/image/linkvortex-19.png",
+    "HTB/image/linkvortex-18.png",
+    "HTB/image/linkvortex-17.png",
+    "HTB/image/linkvortex-16.png",
+    "HTB/image/linkvortex-15.png",
+    "HTB/image/linkvortex-14.png",
+    "HTB/image/linkvortex-13.png",
+    "HTB/Alert.md",
+    "HTB/Cypher.md",
     "Recursos/FFUF.md",
+    "VulnHub/AGENT.md",
     "Recursos"
   ]
 }

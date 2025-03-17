@@ -1,9 +1,9 @@
 
 ![alt text](image/image-3.png)
 
-| MAQUINA | OS | DIFICULTAD |  PLATAFORMA  |    IP     |
+| MAQUINA |  OS   | DIFICULTAD |  PLATAFORMA  |    IP     |
 | :-----: | :---: | :--------: | :----------: | :-------: |
-|   ALERT    | LINUX |   FACIL    | HACK THE BOX | ALERT.HTB |
+|  ALERT  | LINUX |   FACIL    | HACK THE BOX | ALERT.HTB |
 ## *RECONOCIMIENTO*
 
 Con el uso de Nmap identifico los puertos 22/SSH y 80/HTTP dentro de la maquina a vulnerar

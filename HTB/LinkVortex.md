@@ -1,4 +1,5 @@
-![alt text](image/Linkvortex.png)|  MAQUINA   |  OS   | DIFICULTAD |  PLATAFORMA  |       IP       |
+![alt text](image/Linkvortex.png)
+|  MAQUINA   |  OS   | DIFICULTAD |  PLATAFORMA  |       IP       |
 | :--------: | :---: | :--------: | :----------: | :------------: |
 | LinkVortex | Linux |   Facil    | Hack the box | linkvortex.HTB |
 ## *Reconocimiento*

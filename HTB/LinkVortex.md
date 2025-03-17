@@ -1,70 +1,68 @@
-![[image/Linkvortex.png]]
-
-|  MAQUINA   |  OS   | DIFICULTAD |  PLATAFORMA  |       IP       |
+![alt text](image/Linkvortex.png)|  MAQUINA   |  OS   | DIFICULTAD |  PLATAFORMA  |       IP       |
 | :--------: | :---: | :--------: | :----------: | :------------: |
 | LinkVortex | Linux |   Facil    | Hack the box | linkvortex.HTB |
 ## *Reconocimiento*
 
 Comenzamos con nuestro escaneo hacia la IP de la maquina, hay que tener en cuenta que para todas las maquinas de HTB vamos a tener que ingresar la IP a nuestro `/etc/hosts`. Al escanear la dirección IP tenemos 2 puertos, **22/TCP SSH** **80/TCP HTTP**
 
-![[image/linkvortex-1.png]]
+![alt text](image/linkvortex-1.png)
 
 Ya en la pagina Linkvortex.htb tenemos el siguiente diseño, bien seria investigar un poco por nuestro lado para saber si hay pistas en el código fuente de la pagina.
 
-![[image/linkvortex-2.png]]
+![alt text](image/linkvortex-2.png)
 
 Con la herramienta Dirseach, Gobuster,Ffuf, Dirb podemos hacer un scan para encontrar directorios los cuales podrían darnos acceso a lugares que pudieron no haber ocultado o denegado el acceso.
 
-![[image/linkvortex-3.png]]
+![alt text](image/linkvortex-3.png)
 
 En el caso tenemos el archivo más conocido que es `robots.txt` , mientas investigaba las rutas no vi nada interesante. Opté por buscar información por el lado de los subdominios y encuentro una dirección, lo añado al `/etc/hosts`.
 
-![[image/linkvortex-4.png]]
-![[image/linkvortex-5.png]]
+![alt text](image/linkvortex-4.png)
+![alt text](image/linkvortex-5.png)
 
 Al hacer un scaner en la pagina del subdominio encuentro rutas que van de un git. Para obtener esta información hay una herramienta creada en por un usuario de github, esta herramienta se llama Githack.
 
-![[image/linkvortex-6.png]]
+![alt text](image/linkvortex-6.png)
 ## *Análisis de vulnerabilidades*
 
-![[image/linkvortex-7.png]]
+![alt text](image/linkvortex-7.png)
 
 La herramienta está hecha en python, corremos el script e identificamos la dirección a la que necesitamos obtener la información del Git.
 
-![[image/linkvortex-8.png]]
+![alt text](image/linkvortex-8.png)
 
 Cuando reviso los directorios que conseguí por el script me doy cuenta de una contraseña en un archivo Javascript.
 
-![[image/linkvortex-9.png]]
+![alt text](image/linkvortex-9.png)
 
-![[image/linkvortex-10.png]]
+![alt text](image/linkvortex-10.png)
 
 Utilizamos la contraseña encontrada para el correo del admin, este nos da acceso a su cuenta y buscamos la versión que corre su gestor.
 
-![[image/linkvortex-11.png]]
+![alt text](image/linkvortex-11.png)
 
-![[image/linkvortex-12.png]]
+![alt text](image/linkvortex-12.png)
 
-![[image/linkvortex-13.png]]
+![alt text](image/linkvortex-13.png)
 
 Después de esto es buscar una vulnerabilidad que pueda tener esta versión en github o cualquier otra plataforma donde puedan ser publicadas las vulnerabilidades.
 
-![[image/linkvortex-14.png]]
+![alt text](image/linkvortex-14.png)
 ## *Explotación*
 
 Para correr la siguiente vulnerabilidad debemos tener claro el usuario o correo, la contraseña y el host donde está la pagina alojada. Este script no dará la información de la ruta la cual queremos averiguar.
 
-![[image/linkvortex-15.png]]
+![alt text](image/linkvortex-15.png)
 
 En los archivos hace tiempo extraídos en el githack podemos ver una configuración de la pagina Ghost, con el uso de la herramienta podemos dirigirnos a la ruta que deseemos. Utilizamos el script y este nos da las siguientes credenciales.
 
-![[image/linkvortex-16.png]]
-![[image/linkvortex-17.png]]
-![[image/linkvortex-18.png]]
+![alt text](image/linkvortex-16.png)
+![alt text](image/linkvortex-17.png)
+![alt text](image/linkvortex-18.png)
 
 Con las credenciales obtenidas tenemos acceso al usuario bob y con ello a la primera flag de la maquina. Ahora lo que sigue es elevar privilegios y conseguir nuestra ultima flag.
 
-![[image/linkvortex-19.png]]
+![alt text](image/linkvortex-19.png)
 
 Con el comando sudo -l vemos que hay una manera de elevar privilegios , hay un ejecutable pero no sabemos que hace hasta el momento, vemos si tenemos permisos para ver el archivo e indagamos un poco.
 
@@ -73,7 +71,7 @@ Con ayuda de chatgpt se da más claro el objetivo del script:
 > _Este script en **Bash** (`clean_symlink.sh`) está diseñado para **manejar enlaces simbólicos (`symlinks`) que apuntan a archivos PNG**. Su propósito es **verificar si un symlink apunta a archivos sensibles (en `/etc` o `/root`) y, en tal caso, eliminarlo**. Si no es un archivo crítico, lo mueve a una carpeta de **cuarentena** (`/var/quarantined`)._
 ## *Post-Explotación*
 
-![[image/linvortex-20.png]]
+![alt text](image/linvortex-20.png)
 
 **Paso 1: Creación de los enlaces**
 
@@ -160,4 +158,4 @@ Depende del contexto:
 
 ❌ **Si `CHECK_CONTENT=false` y el admin no revisa la cuarentena, el ataque es inútil.**
 
-![[image/linvortex-21.png]]
+![alt text](image/linvortex-21.png)

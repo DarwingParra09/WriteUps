@@ -8,13 +8,16 @@
 Comenzamos con un escaneo simple a la IP generada en Hack the box para esta maquina y se encuentra 2 puertos abiertos.
 
 ![alt text](image/code1.png)
+
 En la búsqueda de directorios solo encontramos los que trae la pagina principal, no había mucho que buscar y tampoco se hallaron subdominios.
 
 ## *Análisis de vulnerabilidades*
 
 La pagina trae un entorno de desarrollo con el lenguaje python, entre muchos códigos que podamos hacer hay una limitación a la hora de importar módulos, la pagina no nos permite trabajar con palabras clave
+
 ![alt text](image/code2.png)
 ![alt text](image/code3.png)
+
 Con ayuda de un foro encontré una solución para bypassear una reverse shell en python. Como no comprendí muy bien este código hice que chatgpt me aclarara.
 
 ```python
@@ -62,10 +65,15 @@ Con ayuda de un foro encontré una solución para bypassear una reverse shell en
 
 ## *Explotación*
 ![alt text](image/code4.png)
+
 Antes de correr el script debo estar en escucha para poder tener la reverse shell. Ejecuto el script y tengo acceso a la ruta de producción.
+
 ![alt text](image/code5.png)
+
 Encuentro las palabras claves que no podían ser leídas por el IDE.
+
 ![alt text](image/code6.png)
+
 Saliendo de la ruta app encontramos la primera flag de usuario.
 
 ![alt text](image/code7.png)

@@ -39,12 +39,14 @@
             "id": "f73bc7393e30e0cf",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "HTB/image/chemi1.png"
+                "file": "HTB/Maquinas/Alert.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "chemi1"
+              "icon": "lucide-file",
+              "title": "Alert"
             }
           },
           {
@@ -208,7 +210,9 @@
   },
   "active": "62f05ed7cf07e3ab",
   "lastOpenFiles": [
-    "HTB/Chemistry.md",
+    "HTB/image/chemi1.png",
+    "HTB/Maquinas",
+    "HTB/Maquinas/Chemistry.md",
     "HTB/image/chemi21.png",
     "HTB/image/chemi20.png",
     "HTB/image/chemi19.png",
@@ -219,14 +223,14 @@
     "HTB/image/chemi14.png",
     "HTB/image/chemi13.png",
     "HTB/image/chemi12.png",
-    "HTB/Alert.md",
-    "HTB/Code.md",
+    "HTB/Maquinas/Alert.md",
+    "HTB/Maquinas/Code.md",
     "Recursos/FFUF.md",
     "Recursos/DFIR (Investigación Forense Digital y Respuesta a Incidentes).md",
     "Recursos/image",
     "Recursos/Trafico_De_Red.md",
-    "HTB/LinkVortex.md",
-    "HTB/Cypher.md",
+    "HTB/Maquinas/LinkVortex.md",
+    "HTB/Maquinas/Cypher.md",
     "VulnHub/AGENT.md",
     "Recursos"
   ]

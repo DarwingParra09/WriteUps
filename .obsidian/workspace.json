@@ -27,12 +27,24 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "HTB/Code.md",
+                "file": "HTB/Chemistry.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Code"
+              "title": "Chemistry"
+            }
+          },
+          {
+            "id": "f73bc7393e30e0cf",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "HTB/image/chemi1.png"
+              },
+              "icon": "lucide-image",
+              "title": "chemi1"
             }
           },
           {
@@ -50,7 +62,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -194,21 +206,22 @@
       "command-palette:Abrir paleta de comandos": false
     }
   },
-  "active": "926d18904284ff53",
+  "active": "62f05ed7cf07e3ab",
   "lastOpenFiles": [
-    "HTB/image/code10.png",
-    "HTB/Code.md",
+    "HTB/Chemistry.md",
+    "HTB/image/chemi21.png",
+    "HTB/image/chemi20.png",
+    "HTB/image/chemi19.png",
+    "HTB/image/chemi18.png",
+    "HTB/image/chemi17.png",
+    "HTB/image/chemi16.png",
+    "HTB/image/chemi15.png",
+    "HTB/image/chemi14.png",
+    "HTB/image/chemi13.png",
+    "HTB/image/chemi12.png",
     "HTB/Alert.md",
-    "HTB/image/code0.png",
+    "HTB/Code.md",
     "Recursos/FFUF.md",
-    "HTB/image/code4.png",
-    "HTB/image/code1.png",
-    "HTB/image/code8.png",
-    "HTB/image/code13.png",
-    "HTB/image/code12.png",
-    "HTB/image/code11.png",
-    "HTB/image/code9.png",
-    "HTB/image/code6.png",
     "Recursos/DFIR (Investigación Forense Digital y Respuesta a Incidentes).md",
     "Recursos/image",
     "Recursos/Trafico_De_Red.md",

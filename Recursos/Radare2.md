@@ -61,3 +61,7 @@ cutter
 🔹 **Exploit Development** (buscar vulnerabilidades en binarios).  
 🔹 **Reversing de software propietario** (encontrar funciones ocultas).  
 🔹 **Patching** (modificar ejecutables sin recompilar el código fuente).
+
+## Maquinas y retos donde se ha utilizado
+
+[SpookyPass](../HTB/Reversing/SpookyPass)

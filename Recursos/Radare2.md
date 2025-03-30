@@ -64,4 +64,4 @@ cutter
 
 ## Maquinas y retos donde se ha utilizado
 
-[SpookyPass](../HTB/Reversing/SpookyPass)
+[SpookyPass](../HTB/Reversing/SpookyPass.md)

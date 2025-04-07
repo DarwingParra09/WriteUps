@@ -62,9 +62,21 @@
               "icon": "lucide-file",
               "title": "Trafico_De_Red"
             }
+          },
+          {
+            "id": "750a5249e79fa5ae",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "VulnHub/image/bob1.png"
+              },
+              "icon": "lucide-image",
+              "title": "bob1"
+            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 4
       }
     ],
     "direction": "vertical"
@@ -208,27 +220,28 @@
       "command-palette:Abrir paleta de comandos": false
     }
   },
-  "active": "7b217d60a3d9feab",
+  "active": "62f05ed7cf07e3ab",
   "lastOpenFiles": [
-    "Recursos/Radare2.md",
+    "VulnHub/Bob.md",
+    "Bob.md",
+    "VulnHub/image/bob22.png",
+    "VulnHub/image/bob21.png",
+    "VulnHub/image/bob20.png",
+    "VulnHub/image/bob19.png",
+    "VulnHub/image/bob18.png",
+    "VulnHub/image/bob17.png",
+    "VulnHub/image/bob16.png",
+    "VulnHub/image/bob15.png",
+    "VulnHub/image/bob14.png",
+    "VulnHub/image/bob13.png",
     "Recursos/Trafico_De_Red.md",
-    "Sin título.md",
+    "Recursos/Radare2.md",
     "Cap.md",
-    "Pasted image 20250330210732.png",
     "HTB/Maquinas/Alert.md",
     "HTB/Maquinas/Chemistry.md",
     "HTB/Maquinas/Code.md",
     "HTB/Maquinas/Cypher.md",
     "HTB/Reversing/SpookyPass.md",
-    "HTB/image/spook1.png",
-    "HTB/image/spook10.png",
-    "HTB/image/spook9.png",
-    "HTB/image/spook8.png",
-    "HTB/image/spook7.png",
-    "HTB/image/spook6.png",
-    "HTB/image/spook5.png",
-    "HTB/image/spook4.png",
-    "HTB/image/spook3.png",
     "HTB/Reversing",
     "HTB/Maquinas",
     "Recursos/FFUF.md",

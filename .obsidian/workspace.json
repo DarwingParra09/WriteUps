@@ -22,21 +22,35 @@
             }
           },
           {
-            "id": "7972640b7853856c",
+            "id": "4e1975bbf158d34b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "HTB/Maquinas/Code.md",
+                "file": "Splunk.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Code"
+              "title": "Splunk"
+            }
+          },
+          {
+            "id": "0c2327f1acd08f8d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Recursos/Bash.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Bash"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -181,8 +195,15 @@
       "command-palette:Abrir paleta de comandos": false
     }
   },
-  "active": "7972640b7853856c",
+  "active": "0c2327f1acd08f8d",
   "lastOpenFiles": [
+    "Pasted image 20250410202757.png",
+    "Recursos/Bash.md",
+    "Splunk.md",
+    "Recursos/DFIR (Investigación Forense Digital y Respuesta a Incidentes).md",
+    "Recursos/FFUF.md",
+    "Recursos/Radare2.md",
+    "Recursos/Trafico_De_Red.md",
     "HTB/Maquinas/Lame.md",
     "HTB/Maquinas/Code.md",
     "HTB/image/lame18.png",
@@ -194,11 +215,8 @@
     "HTB/image/lame13.png",
     "HTB/image/lame12.png",
     "HTB/image/lame11.png",
-    "HTB/image/lame10.png",
-    "Recursos/Trafico_De_Red.md",
     "VulnHub/Bob.md",
     "Bob.md",
-    "Recursos/Radare2.md",
     "Cap.md",
     "HTB/Maquinas/Alert.md",
     "HTB/Maquinas/Chemistry.md",
@@ -206,8 +224,6 @@
     "HTB/Reversing/SpookyPass.md",
     "HTB/Reversing",
     "HTB/Maquinas",
-    "Recursos/FFUF.md",
-    "Recursos/DFIR (Investigación Forense Digital y Respuesta a Incidentes).md",
     "Recursos/image",
     "HTB/Maquinas/LinkVortex.md",
     "VulnHub/AGENT.md",

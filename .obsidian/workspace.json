@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Recursos/Splunk.md",
+                "file": "HTB/Sherlocks/DFIR/Brutus.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Splunk"
+              "title": "Brutus"
             }
           }
         ],
@@ -93,7 +93,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "0d2d54f72bd44ac5",
@@ -180,8 +181,9 @@
       "command-palette:Abrir paleta de comandos": false
     }
   },
-  "active": "62f05ed7cf07e3ab",
+  "active": "0c2327f1acd08f8d",
   "lastOpenFiles": [
+    "Recursos/Splunk.md",
     "Recursos/Bash.md",
     "HTB/Sherlocks/image/brutus0.png",
     "HTB/Sherlocks/DFIR/Brutus.md",
@@ -199,7 +201,6 @@
     "Recursos/DFIR (Investigación Forense Digital y Respuesta a Incidentes).md",
     "HTB/Sherlocks/DFIR",
     "HTB/Sherlocks",
-    "Recursos/Splunk.md",
     "HTB/Maquinas/Lame.md",
     "Recursos/FFUF.md",
     "Recursos/Radare2.md",

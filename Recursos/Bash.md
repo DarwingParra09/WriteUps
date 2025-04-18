@@ -154,3 +154,7 @@ sudo adduser [usuario]
 ```bash
 sudo userdel -r [usuario]
 ```
+
+
+
+

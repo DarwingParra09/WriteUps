@@ -21,19 +21,19 @@ Los profesionales de la seguridad ayudan en varias rutas, como las siguientes:
 
 ## Herramientas DFIR
 
-![alt text](image/Eric_Zimmerman.png)
+![alt text](../image/Eric_Zimmerman.png)
 
 **Eric Zimmerman's Tools**: es un buscador de seguridad el cual tiene escrito unas cuantas herramientas que ayudan a la realización de análisis forenses en plataformas windows. Estas herramientas ayudan a los registros, archivos de sistema, líneas de tiempo, y muchos otros análisis.
 
-![alt text](image/Kape.png)
+![alt text](../image/Kape.png)
 
 **Kape:** Analizador y extractor de artefactos Kroll es otra herramienta hecha por Eric Zimmerman. Esta herramienta automatiza la recolección y el análisis de artefactos forenses que puedan ayudar a crear una linea de tiempo de eventos.
 
-![alt text](image/Autopsy.png)
+![alt text](../image/Autopsy.png)
 
 **Autopsy:** Es una plataforma forense de código abierto que ayuda al análisis de medios de comunicación como dispositivos móviles, disco duros, unidades extraíbles. Varios plugins pueden acelerar el proceso forense de extracción y presentar información valiosa de las fuentes de datos sin procesar.
 
-![alt text](image/Volatility.png)
+![alt text](../image/Volatility.png)
 
 **Volatility:** esta herramienta ayuda a llevar a cabo análisis de memoria para capturas de memoria de ambos sistemas operativos Windows y Linux. Esta es una poderosa herramienta que pueda ayudar a extraer información importante de la memoria de una maquina dentro de la investigación.
 

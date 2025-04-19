@@ -38,7 +38,7 @@ Antes de enviar el mensaje ejecuto un servidor en python con el mismo puerto en 
 
 ![alt text](../../image/image-10.png)
 
-El archivo `.htpasswd` es un componente usado en conjunto con `.htaccess` para implementar autenticación básica basada en HTTP en servidores web. Este archivo contiene nombres de usuario y contraseñas (../../image/generalmente cifradas) para controlar el acceso a áreas protegidas del servidor.
+El archivo `.htpasswd` es un componente usado en conjunto con `.htaccess` para implementar autenticación básica basada en HTTP en servidores web. Este archivo contiene nombres de usuario y contraseñas (generalmente cifradas) para controlar el acceso a áreas protegidas del servidor.
 
 Observando que nuestro primer intento funciona podemos hacer una edicion para obtener el archivo .htpasswd, este archivo se encuentra en servidores Apache HTTP Server, Nginx, LiteSpeed.
 

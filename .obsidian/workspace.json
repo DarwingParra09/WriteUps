@@ -4,19 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "7118466dfcda16d2",
+        "id": "c9d90c862dd35498",
         "type": "tabs",
         "children": [
           {
-            "id": "0c2327f1acd08f8d",
+            "id": "8670795a4b4da9c0",
             "type": "leaf",
             "state": {
-              "type": "image",
+              "type": "markdown",
               "state": {
-                "file": "image/chemi1.png"
+                "file": "HTB/Maquinas/Alert.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "lucide-image",
-              "title": "chemi1"
+              "icon": "lucide-file",
+              "title": "Alert"
             }
           }
         ]
@@ -76,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "0d2d54f72bd44ac5",
@@ -163,24 +166,25 @@
       "command-palette:Abrir paleta de comandos": false
     }
   },
-  "active": "62f05ed7cf07e3ab",
+  "active": "8670795a4b4da9c0",
   "lastOpenFiles": [
-    "image/bob22.png",
-    "image/bob21.png",
-    "image/bob20.png",
-    "image/bob19.png",
-    "image/bob18.png",
-    "image/bob17.png",
-    "image/bob16.png",
-    "image/bob15.png",
-    "image/bob14.png",
-    "image/bob13.png",
-    "image/bob12.png",
+    "Nocturnal.md",
+    "HTB/Maquinas/Nocturnal.md",
+    "image/Pasted image 20250427195957.png",
+    "Pasted image 20250427195957.png",
+    "image/nocturnal0.png",
+    "image/nocturnal37.png",
+    "image/nocturnal36.png",
+    "image/nocturnal35.png",
+    "image/nocturnal34.png",
+    "image/nocturnal33.png",
+    "image/nocturnal32.png",
+    "image/nocturnal31.png",
+    "HTB/Maquinas/Alert.md",
     "HTB/Sherlocks/DFIR/Brutus.md",
     "Recursos/Splunk.md",
     "Recursos/Bash.md",
     "HTB/Sherlocks/image",
-    "Sin título.md",
     "Recursos/DFIR (Investigación Forense Digital y Respuesta a Incidentes).md",
     "HTB/Sherlocks/DFIR",
     "HTB/Sherlocks",
@@ -192,7 +196,6 @@
     "VulnHub/Bob.md",
     "Bob.md",
     "Cap.md",
-    "HTB/Maquinas/Alert.md",
     "HTB/Maquinas/Chemistry.md",
     "HTB/Maquinas/Cypher.md",
     "HTB/Reversing/SpookyPass.md",

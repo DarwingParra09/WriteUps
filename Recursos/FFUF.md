@@ -55,3 +55,4 @@ ffuf -w [wordlist.txt]:FUZZ -u http://[SERVER_IP:PORT]/admin/admin.php -X POST -
 ```bash
 ffuf -w [wordlist.txt]:FUZZ -u http://[SERVER_IP:PORT]/admin/admin.php -X POST -d 'id=FUZZ' -H 'Content-Type: application/x-www-form-urlencoded' -fs xxx
 ```
+

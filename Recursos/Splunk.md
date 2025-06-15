@@ -233,4 +233,44 @@ index=* source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational"
 | table _time, User, host, CommandLine, ProcessId
 ```
 
+# Detección de Pass-the-Hash
+
+### Pass the hash
+
+Es una técnica utilizada por atacantes para autenticarse en un sistema en red mediante el `NTLM`hash de la contraseña de un usuario en lugar de la contraseña en texto plano. El ataque aprovecha la forma en que Windows almacena los hashes de contraseñas en la memoria, lo que permite a los atacantes con acceso administrativo capturar el hash y reutilizarlo para el acceso lateral dentro de la red.
+
+**Pasos del ataque**
+
+- El atacante utiliza herramientas como `Mimikatz`la extracción del `NTLM`hash de un usuario conectado al sistema comprometido. Tenga en cuenta que se requieren privilegios de administrador local en el sistema para extraer el hash del usuario.
+- Armado con el `NTLM`hash, el atacante puede autenticarse como el usuario objetivo en otros sistemas o recursos de red sin necesidad de conocer la contraseña real.
+- Al utilizar la sesión autenticada, el atacante puede moverse lateralmente dentro de la red y obtener acceso no autorizado a otros sistemas y recursos.
+
+#### Oportunidades de detección de Pass-the-Hash
+
+Desde la perspectiva del Registro de eventos de Windows, se generan los siguientes registros cuando se ejecuta el comando **`runas`**:
+
+- Cuando el comando `runas` se ejecuta sin la bandera `/netonly` - `Event ID 4624 (Logon)`con `LogonType 2 (interactive)`.
+- Cuando `runas` se ejecuta un comando con la `/netonly`bandera - `Event ID 4624 (Logon)`con `LogonType 9 (NewCredentials)`.
+
+#### Detección de Pass-the-Hash con Splunk
+
+Antes de pasar a revisar las búsquedas, consulte [esta](https://blog.netwrix.com/2021/11/30/how-to-detect-pass-the-hash-attacks) fuente para comprender mejor de dónde se originó la parte de búsqueda `Logon_Process=seclogo`.
+```shell
+index=main earliest=1690450708 latest=1690451116 source="WinEventLog:Security" EventCode=4624 Logon_Type=9 Logon_Process=seclogo
+| table _time, ComputerName, EventCode, user, Network_Account_Domain, Network_Account_Name, Logon_Type, Logon_Process
+```
+
+podemos mejorar la búsqueda anterior agregando acceso a memoria LSASS a la mezcla de la siguiente manera.
+```shell
+index=main earliest=1690450689 latest=1690451116 (source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" EventCode=10 TargetImage="C:\\Windows\\system32\\lsass.exe" SourceImage!="C:\\ProgramData\\Microsoft\\Windows Defender\\platform\\*\\MsMpEng.exe") OR (source="WinEventLog:Security" EventCode=4624 Logon_Type=9 Logon_Process=seclogo)
+| sort _time, RecordNumber
+| transaction host maxspan=1m endswith=(EventCode=4624) startswith=(EventCode=10)
+| stats count by _time, Computer, SourceImage, SourceProcessId, Network_Account_Domain, Network_Account_Name, Logon_Type, Logon_Process
+| fields - count
+```
+
+*Ejemplo: Se produjo un ataque Pass-the-Hash durante el siguiente intervalo de tiempo: earliest=1690543380 latest=1690545180. Ingrese el nombre del equipo involucrado como respuesta.*
+
+![alt text](../image/splunk5.png)
+
 

@@ -273,4 +273,75 @@ index=main earliest=1690450689 latest=1690451116 (source="XmlWinEventLog:Microso
 
 ![alt text](../image/splunk5.png)
 
+# Detectando Pass-the-Ticket
+
+## Pass the Ticket (PtT)
+
+Es una técnica de movimiento lateral utilizada por atacantes para desplazarse lateralmente dentro de una red mediante el uso indebido de los tickets TGT (Ticket Granting Ticket) y TGS (Ticket Granting Service) de Kerberos. En lugar de usar hashes NTLM, PtT aprovecha los tickets Kerberos para autenticarse en otros sistemas y acceder a los recursos de la red sin necesidad de conocer las contraseñas de los usuarios. Esta técnica permite a los atacantes desplazarse lateralmente y obtener acceso no autorizado a múltiples sistemas.
+
+**Pasos de ataque:**
+
+- El atacante obtiene acceso administrativo a un sistema, ya sea a través de un compromiso inicial o una escalada de privilegios.
+- El atacante utiliza herramientas como `Mimikatz`o `Rubeus`para extraer tickets TGT o TGS válidos de la memoria del sistema comprometido.
+- El atacante envía el ticket extraído para la sesión actual. Ahora puede autenticarse en otros sistemas y recursos de red sin necesidad de contraseñas en texto plano.
+
+#### Eventos de seguridad de Windows relacionados
+
+Durante el acceso del usuario a los recursos de red, se generan varios registros de eventos de Windows para registrar el proceso de inicio de sesión y las actividades relacionadas.
+
+- `Event ID 4648 (Explicit Credential Logon Attempt)`:Este evento se registra cuando se proporcionan credenciales explícitas (por ejemplo, nombre de usuario y contraseña) durante el inicio de sesión.
+- `Event ID 4624 (Logon)`:Este evento indica que un usuario ha iniciado sesión correctamente en el sistema.
+- `Event ID 4672 (Special Logon)`:Este evento se registra cuando el inicio de sesión de un usuario incluye privilegios especiales, como ejecutar aplicaciones como administrador.
+- `Event ID 4768 (Kerberos TGT Request)`:Este evento se registra cuando un cliente solicita un ticket de concesión de tickets (TGT) durante el proceso de autenticación Kerberos.
+- `Event ID 4769 (Kerberos Service Ticket Request)`:Cuando un cliente solicita un ticket de servicio (ticket TGS) para acceder a un servicio remoto durante el proceso de autenticación Kerberos, se genera el ID de evento 4769.
+
+## Detección de fraudes con Splunk
+
+Ahora exploraremos cómo podemos identificar Pass-the-Ticket, usando Splunk.
+
+```shell
+index=main earliest=1690392405 latest=1690451745 source="WinEventLog:Security" user!=*$ EventCode IN (4768,4769,4770) 
+| rex field=user "(?<username>[^@]+)"
+| rex field=src_ip "(\:\:ffff\:)?(?<src_ip_4>[0-9\.]+)"
+| transaction username, src_ip_4 maxspan=10h keepevicted=true startswith=(EventCode=4768)
+| where closed_txn=0
+| search NOT user="*$@*"
+| table _time, ComputerName, username, src_ip_4, service_name, category
+```
+
+*Ejemplo: Ejecute la búsqueda de Splunk que se proporciona al final de esta sección para encontrar todos los nombres de usuario que podrían haber ejecutado un ataque de paso de tickets. Ingrese el nombre de usuario que falta de la siguiente lista como respuesta. Administrador, _*
+
+![alt text](../image/splunk6.png)
+
+## Detectando Sobrepaso de Hash
+
+### Overpass-the-Hash
+
+Los adversarios pueden utilizar esta `Overpass-the-Hash`técnica para obtener TGT de Kerberos aprovechando hashes de contraseñas robadas para moverse lateralmente dentro de un entorno o para eludir los controles de acceso habituales del sistema. Overpass-the-Hash (también conocido como [`Pass-the-Key`]) permite la autenticación mediante Kerberos en lugar de NTLM. Tanto los hashes NTLM como las claves AES pueden servir como base para solicitar un TGT de Kerberos.
+
+#### Pasos de ataque:
+
+- El atacante utiliza herramientas como Mimikatz para extraer el hash NTLM de un usuario que haya iniciado sesión en el sistema comprometido. El atacante debe tener al menos privilegios de administrador local en el sistema para poder extraer el hash del usuario.
+- El atacante utiliza una herramienta como Rubeus para crear una solicitud AS-REQ sin procesar para que un usuario específico solicite un ticket TGT. Este paso no requiere privilegios elevados en el host para solicitar el TGT, lo que lo convierte en un enfoque más sigiloso que el ataque Pass-the-Hash de Mimikatz.
+- De manera análoga a la técnica Pass-the-Ticket, el atacante envía el ticket solicitado para la sesión de inicio de sesión actual.
+
+#### Oportunidades de detección de sobrepaso del hash
+
+`Mimikatz`El ataque Overpass-the-Hash deja los mismos artefactos que el ataque Pass-the-Hash y se puede detectar utilizando las mismas estrategias.
+
+`Rubeus`Sin embargo, presenta un escenario ligeramente diferente. A menos que el TGT solicitado se utilice en otro host, los mecanismos de detección de Pass-the-Ticket podrían no ser efectivos, ya que Rubeus envía una solicitud AS-REQ directamente al controlador de dominio (DC), generando [`Event ID 4768 (Kerberos TGT Request)`]. No obstante, la comunicación con el DC ( `TCP/UDP port 88`) desde un proceso inusual puede indicar un posible ataque Overpass-the-Hash.
+
+## Detección de errores hash con Splunk (objetivo: Rubeus)
+
+```shell
+index=main earliest=1690443407 latest=1690443544 source="XmlWinEventLog:Microsoft-Windows-Sysmon/Operational" (EventCode=3 dest_port=88 Image!=*lsass.exe) OR EventCode=1
+| eventstats values(process) as process by process_id
+| where EventCode=3
+| stats count by _time, Computer, dest_ip, dest_port, Image, process
+| fields - count
+```
+
+*Ejemplo: Utilice la búsqueda de Splunk que se proporciona al final de esta sección en todos los datos ingresados ​​(Todo el tiempo) para encontrar todas las imágenes involucradas (campo Imagen). Ingrese el nombre de la imagen que falta de la siguiente lista como respuesta. Rubeus.exe, _.exe*
+
+![alt text](../image/splunk7.png)
 

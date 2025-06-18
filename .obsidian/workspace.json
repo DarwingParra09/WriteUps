@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "0d2d54f72bd44ac5",
@@ -165,8 +166,10 @@
       "command-palette:Abrir paleta de comandos": false
     }
   },
-  "active": "62f05ed7cf07e3ab",
+  "active": "5c19496f68a6c2c1",
   "lastOpenFiles": [
+    "image/splunk7.png",
+    "image/splunk6.png",
     "image/splunk5.png",
     "image/splunk1.png",
     "Recursos/Splunk.md",
@@ -188,8 +191,6 @@
     "Pasted image 20250523135421.png",
     "image/puppy0.png",
     "image/puppy36.png",
-    "image/puppy35.png",
-    "image/puppy34.png",
     "HTB/Maquinas/Alert.md",
     "Nocturnal.md",
     "HTB/Sherlocks/DFIR/Brutus.md",

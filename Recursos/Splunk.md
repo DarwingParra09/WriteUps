@@ -345,3 +345,145 @@ index=main earliest=1690443407 latest=1690443544 source="XmlWinEventLog:Microsof
 
 ![alt text](../image/splunk7.png)
 
+# Detectando Golden Tickets/Silver Tickets
+
+## Golden Ticket
+
+Un `Golden Ticket`ataque es un método potente en el que un atacante falsifica un ticket de concesión de tickets (TGT) para obtener acceso no autorizado a un dominio de Windows Active Directory como administrador. El atacante crea un TGT con credenciales de usuario arbitrarias y utiliza este ticket falsificado para hacerse pasar por un administrador, obteniendo así el control total del dominio. El ataque Golden Ticket es sigiloso y persistente, ya que el ticket falsificado tiene una larga validez y permanece válido hasta su vencimiento o revocación.
+
+### Pasos de ataques: 
+
+- El atacante extrae el hash NTLM de la cuenta KRBTGT mediante un `DCSync`ataque (alternativamente, puede usar `NTDS.dit`y `LSASS process dumps`en el controlador de dominio).
+- Armado con el `KRBTGT`hash, el atacante falsifica un TGT para una cuenta de usuario arbitraria, asignándole privilegios de administrador de dominio.
+- - El atacante inyecta el TGT falsificado de la misma manera que en un ataque Pass-the-Ticket.
+
+#### Oportunidades de detección de boletos dorados
+
+Detectar ataques de Golden Ticket puede ser complicado, ya que un atacante puede falsificar el TGT sin conexión, sin dejar prácticamente rastros de `Mimikatz`ejecución. Una opción es monitorear los métodos comunes de extracción del `KRBTGT`hash:
+
+- `DCSync attack`
+- `NTDS.dit file access`
+- `LSASS memory read on the domain controller (Sysmon Event ID 10)`
+
+Desde otro punto de vista, un Boleto Dorado es simplemente otro boleto para la detección de Pass-the-Ticket.
+
+## Detección de tickets dorados con Splunk (otro método para pasar tickets)
+
+```shell
+index=main earliest=1690451977 latest=1690452262 source="WinEventLog:Security" user!=*$ EventCode IN (4768,4769,4770) 
+| rex field=user "(?<username>[^@]+)"
+| rex field=src_ip "(\:\:ffff\:)?(?<src_ip_4>[0-9\.]+)"
+| transaction username, src_ip_4 maxspan=10h keepevicted=true startswith=(EventCode=4768)
+| where closed_txn=0
+| search NOT user="*$@*"
+| table _time, ComputerName, username, src_ip_4, service_name, category
+```
+
+# Silver Ticket
+
+Los adversarios que poseen el hash de la contraseña de una cuenta de servicio objetivo (p. ej., `SharePoint`, `MSSQL`) pueden falsificar tickets del Servicio de Concesión de Tickets (TGS) de Kerberos, también conocidos como `Silver Tickets`. Los tickets Silver pueden usarse para suplantar la identidad de cualquier usuario, pero su alcance es más limitado que el de los Golden Tickets, ya que solo permiten a los adversarios acceder a un recurso específico (p. ej., `MSSQL`) y al sistema que lo aloja.
+
+### Pasos de ataque: 
+
+- El atacante extrae el hash NTLM de la cuenta de servicio de destino (o la cuenta de computadora para `CIFS`el acceso) utilizando herramientas como `Mimikatz`u otras técnicas de volcado de credenciales.
+- Generar un ticket plateado: utilizando el hash NTLM extraído, el atacante emplea herramientas como `Mimikatz`para crear un ticket TGS falsificado para el servicio especificado.
+- El atacante inyecta el TGT falsificado de la misma manera que en un ataque Pass-the-Ticket.
+
+#### Oportunidades de detección de boletos plateados
+
+Detectar tickets de servicio falsificados (TGS) puede ser complicado, ya que no existen indicadores sencillos de ataque. Tanto en los ataques de Ticket Dorado como de Ticket Plateado, se pueden usar usuarios arbitrarios. `including non-existent ones`. `Event ID 4720 (A user account was created)`puede ayudar a identificar usuarios recién creados. Posteriormente, podemos comparar esta lista de usuarios con los usuarios conectados.
+
+Debido a que no existe validación para los permisos de usuario, a los usuarios se les pueden otorgar permisos administrativos. `Event ID 4672 (Special Logon)`se puede emplear para detectar privilegios asignados de forma anómala.
+
+## Detección de billetes de plata con Splunk
+
+#### Detección de tickets de plata con Splunk mediante correlación de usuarios
+
+Primero, creemos una lista de usuarios ( `users.csv`) aprovechando `Event ID 4720 (A user account was created)`lo siguiente.
+
+```shell
+index=main latest=1690448444 EventCode=4720
+| stats min(_time) as _time, values(EventCode) as EventCode by user
+| outputlookup users.csv
+```
+**Nota** : `users.csv`se puede descargar desde la `Resources`sección de este módulo (esquina superior derecha) y cargar en Splunk haciendo clic en `Settings`-> `Lookups`-> `Lookup table files`-> `New Lookup Table File`.
+
+```shell
+index=main latest=1690545656 EventCode=4624
+| stats min(_time) as firstTime, values(ComputerName) as ComputerName, values(EventCode) as EventCode by user
+| eval last24h = 1690451977
+| where firstTime > last24h
+```| eval last24h=relative_time(now(),"-24h@h")```
+| convert ctime(firstTime)
+| convert ctime(last24h)
+| lookup users.csv user as user OUTPUT EventCode as Events
+| where isnull(Events)
+```
+#### Detección de tickets Silver con Splunk mediante privilegios especiales asignados a nuevos inicios de sesión
+
+```shell-session
+index=main latest=1690545656 EventCode=4672
+| stats min(_time) as firstTime, values(ComputerName) as ComputerName by Account_Name
+| eval last24h = 1690451977 
+```| eval last24h=relative_time(now(),"-24h@h") ```
+| where firstTime > last24h 
+| table firstTime, ComputerName, Account_Name 
+| convert ctime(firstTime)
+```
+*Ejemplo: ¿Para qué "servicio" el usuario llamado Barbi generó un ticket plata?*
+
+- ### Puedes **sospechar fuertemente** de uso de Mimikatz o Rubeus cuando:
+
+1. Usuario inesperado recibe privilegios (`4672`)
+    
+2. No hay TGT ni TGS request (`4768` / `4769`)
+    
+3. Hay logon por Kerberos con `KeyLength=0` (`4624`)
+    
+4. Destino del logon: `CIFS/<host>` (o actividad SMB posterior)
+
+
+![alt text](../image/splunk8.png)
+![alt text](../image/splunk9.png)
+![alt text](../image/splunk10.png)
+![alt text](../image/splunk11.png)
+![alt text](../image/splunk12.png)
+
+# Detección de ataques de delegación sin restricciones/delegación restringida
+
+## Delegación sin restricciones
+
+Es un privilegio que se puede otorgar a cuentas de usuario o de equipo en un entorno de Active Directory, lo que permite que un servicio se autentique en otro recurso en nombre del `any`usuario. Esto puede ser necesario cuando, por ejemplo, un servidor web requiere acceso a un servidor de bases de datos para realizar cambios en nombre de un usuario.
+
+- Pasos para el ataque:
+1. El atacante identifica los sistemas en los que está habilitada la delegación sin restricciones para las cuentas de servicio.
+2. El atacante obtiene acceso a un sistema con la delegación sin restricciones habilitada.
+3. El atacante extrae tickets TGT (Ticket Granting Ticket) de la memoria del sistema comprometido utilizando herramientas como `Mimikatz`
+
+#### Oportunidades de detección de ataques de delegación sin restricciones
+
+Los comandos de PowerShell y los filtros de búsqueda LDAP utilizados para la detección de delegación sin restricciones se pueden detectar mediante la supervisión del registro de bloques de scripts de PowerShell ( `Event ID 4104`) y el registro de solicitudes LDAP.
+
+El objetivo principal de un ataque de delegación sin restricciones es recuperar y reutilizar los tickets TGT, por lo que también se puede utilizar la detección de paso de ticket.
+
+## Detección de ataques de delegación sin restricciones con Splunk
+
+```shell
+index=main earliest=1690544538 latest=1690544540 source="WinEventLog:Microsoft-Windows-PowerShell/Operational" EventCode=4104 Message="*TrustedForDelegation*" OR Message="*userAccountControl:1.2.840.113556.1.4.803:=524288*" 
+| table _time, ComputerName, EventCode, Message
+```
+
+## Delegación restringida
+
+Es una característica de **Active Directory** que permite a ciertos servicios actuar _en nombre de un usuario_, pero **solo frente a servicios específicos** y previamente autorizados.
+
+Imagina que un servidor (por ejemplo, un servidor web) necesita acceder a otro servicio (como una base de datos) usando las credenciales del usuario que inició sesión. Con la delegación restringida, se le puede dar permiso **solo para acceder a esa base de datos y no a otros servicios**. Esto es una medida de seguridad importante, porque evita que un servicio pueda usar las credenciales del usuario para acceder a cualquier parte de la red.
+
+Esto funciona gracias a una propiedad llamada `msDS-AllowedToDelegateTo`. Esta propiedad le dice al servidor:  
+🗣️ _"Solo puedes hacerte pasar por usuarios para estos servicios específicos que están en esta lista."_
+
+- Pasos de ataque:
+1. El atacante identifica los sistemas donde está habilitada la delegación restringida y determina los recursos a los que se les permite delegar.
+2. El atacante obtiene acceso al TGT del principal (usuario o equipo). El TGT puede extraerse de la memoria (volcado de Rubeus) o solicitarse con el hash del principal.
+3. El atacante utiliza la técnica S4U para suplantar una cuenta con altos privilegios en el servicio objetivo (solicitando un ticket TGS).
+4. El atacante inyecta el ticket solicitado y accede a los servicios específicos como el usuario suplantado.

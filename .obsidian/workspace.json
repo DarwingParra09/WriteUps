@@ -20,6 +20,18 @@
               "icon": "lucide-file",
               "title": "Splunk"
             }
+          },
+          {
+            "id": "adbe81f43ad4506b",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "image/splunk8.png"
+              },
+              "icon": "lucide-image",
+              "title": "splunk8"
+            }
           }
         ]
       }
@@ -78,8 +90,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "0d2d54f72bd44ac5",
@@ -168,15 +179,20 @@
   },
   "active": "5c19496f68a6c2c1",
   "lastOpenFiles": [
+    "image/splunk8.png",
+    "image/splunk12.png",
+    "Recursos/Splunk.md",
+    "image/splunk9.png",
+    "image/splunk11.png",
+    "image/splunk10.png",
+    "HTB/Maquinas/Puppy.md",
+    "HTB/Maquinas/Chemistry.md",
+    "HTB/Maquinas/Code.md",
     "image/splunk7.png",
     "image/splunk6.png",
     "image/splunk5.png",
     "image/splunk1.png",
-    "Recursos/Splunk.md",
     "image/splunk4.png",
-    "image/splunk3.png",
-    "image/splunk2.png",
-    "HTB/Maquinas/Puppy.md",
     "HTB/Maquinas/Nocturnal.md",
     "HTB/Maquinas/LinkVortex.md",
     "Recursos/FFUF.md",
@@ -187,10 +203,6 @@
     "Recursos/Radare2.md",
     "Recursos/Trafico_De_Red.md",
     "HTB/Sherlocks/DFIR/Origins.md",
-    "Pasted image 20250521201600.png",
-    "Pasted image 20250523135421.png",
-    "image/puppy0.png",
-    "image/puppy36.png",
     "HTB/Maquinas/Alert.md",
     "Nocturnal.md",
     "HTB/Sherlocks/DFIR/Brutus.md",
@@ -198,11 +210,9 @@
     "HTB/Sherlocks/DFIR",
     "HTB/Sherlocks",
     "HTB/Maquinas/Lame.md",
-    "HTB/Maquinas/Code.md",
     "VulnHub/Bob.md",
     "Bob.md",
     "Cap.md",
-    "HTB/Maquinas/Chemistry.md",
     "HTB/Maquinas/Cypher.md",
     "HTB/Reversing/SpookyPass.md",
     "HTB/Reversing",

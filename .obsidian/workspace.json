@@ -13,27 +13,28 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Recursos/Splunk.md",
+                "file": "BurpSuite/SQL/Vulnerabilidad de inyección SQL en la cláusula WHERE que permite la recuperación de datos ocultos.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Splunk"
+              "title": "Vulnerabilidad de inyección SQL en la cláusula WHERE que permite la recuperación de datos ocultos"
             }
           },
           {
-            "id": "adbe81f43ad4506b",
+            "id": "250655c2bbafd235",
             "type": "leaf",
             "state": {
               "type": "image",
               "state": {
-                "file": "image/splunk8.png"
+                "file": "image/sesion1.png"
               },
               "icon": "lucide-image",
-              "title": "splunk8"
+              "title": "sesion1"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -177,22 +178,26 @@
       "command-palette:Abrir paleta de comandos": false
     }
   },
-  "active": "5c19496f68a6c2c1",
+  "active": "62f05ed7cf07e3ab",
   "lastOpenFiles": [
+    "BurpSuite/SQL/Vulnerabilidad de inyección SQL que permite omitir el inicio de sesión.md",
+    "image/sesion3.png",
+    "image/sesion1.png",
+    "image/sesion2.png",
+    "BurpSuite/SQL/Vulnerabilidad de inyección SQL en la cláusula WHERE que permite la recuperación de datos ocultos.md",
+    "image/Sql4.png",
+    "image/Sql1.png",
+    "image/Sql3.png",
+    "image/Sql2.png",
     "image/splunk8.png",
-    "image/splunk12.png",
+    "BurpSuite/SQL",
+    "BurpSuite",
     "Recursos/Splunk.md",
+    "image/splunk12.png",
     "image/splunk9.png",
-    "image/splunk11.png",
-    "image/splunk10.png",
     "HTB/Maquinas/Puppy.md",
     "HTB/Maquinas/Chemistry.md",
     "HTB/Maquinas/Code.md",
-    "image/splunk7.png",
-    "image/splunk6.png",
-    "image/splunk5.png",
-    "image/splunk1.png",
-    "image/splunk4.png",
     "HTB/Maquinas/Nocturnal.md",
     "HTB/Maquinas/LinkVortex.md",
     "Recursos/FFUF.md",
@@ -218,7 +223,6 @@
     "HTB/Reversing",
     "HTB/Maquinas",
     "image",
-    "VulnHub/AGENT.md",
     "Recursos"
   ]
 }

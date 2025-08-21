@@ -13,28 +13,15 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "BurpSuite/SQL/Vulnerabilidad de inyección SQL en la cláusula WHERE que permite la recuperación de datos ocultos.md",
+                "file": "BurpSuite/SQL/Ataque de inyección SQL, consultando el tipo y la versión de la base de datos en Oracle.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Vulnerabilidad de inyección SQL en la cláusula WHERE que permite la recuperación de datos ocultos"
-            }
-          },
-          {
-            "id": "250655c2bbafd235",
-            "type": "leaf",
-            "state": {
-              "type": "image",
-              "state": {
-                "file": "image/sesion1.png"
-              },
-              "icon": "lucide-image",
-              "title": "sesion1"
+              "title": "Ataque de inyección SQL, consultando el tipo y la versión de la base de datos en Oracle"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -170,6 +157,7 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "bases:Crear nueva base": false,
       "switcher:Abrir selector rápido": false,
       "graph:Abrir vista gráfica": false,
       "canvas:Crear nuevo lienzo": false,
@@ -178,23 +166,24 @@
       "command-palette:Abrir paleta de comandos": false
     }
   },
-  "active": "62f05ed7cf07e3ab",
+  "active": "5c19496f68a6c2c1",
   "lastOpenFiles": [
+    "image/basedatosOracle1.png",
+    "BurpSuite/SQL/Ataque de inyección SQL, consultando el tipo y la versión de la base de datos en Oracle.md",
     "BurpSuite/SQL/Vulnerabilidad de inyección SQL que permite omitir el inicio de sesión.md",
-    "image/sesion3.png",
-    "image/sesion1.png",
-    "image/sesion2.png",
+    "image/basedatosOracle5.png",
+    "image/basedatosOracle4.png",
+    "image/basedatosOracle3.png",
+    "image/basedatosOracle2.png",
     "BurpSuite/SQL/Vulnerabilidad de inyección SQL en la cláusula WHERE que permite la recuperación de datos ocultos.md",
+    "image/sesion1.png",
+    "image/sesion3.png",
+    "image/sesion2.png",
     "image/Sql4.png",
     "image/Sql1.png",
-    "image/Sql3.png",
-    "image/Sql2.png",
-    "image/splunk8.png",
     "BurpSuite/SQL",
     "BurpSuite",
     "Recursos/Splunk.md",
-    "image/splunk12.png",
-    "image/splunk9.png",
     "HTB/Maquinas/Puppy.md",
     "HTB/Maquinas/Chemistry.md",
     "HTB/Maquinas/Code.md",
@@ -219,7 +208,6 @@
     "Bob.md",
     "Cap.md",
     "HTB/Maquinas/Cypher.md",
-    "HTB/Reversing/SpookyPass.md",
     "HTB/Reversing",
     "HTB/Maquinas",
     "image",

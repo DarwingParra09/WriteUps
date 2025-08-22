@@ -17,6 +17,7 @@ Filtrando por la categoría accesorios busco cuantas columnas trae la base de da
 | Microsoft  | `SELECT @@version`                                                 |
 | PostgreSQL | `SELECT version()`                                                 |
 | MySQL      | `SELECT @@version`                                                 |
+
 La información anterior son los tipos de formas de obtener la versión de base de datos, si adaptamos esto a la petición tendría lo siguiente.
 
 ![alt text](/image/versionDB4.png)

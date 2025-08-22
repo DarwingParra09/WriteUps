@@ -8,18 +8,6 @@
         "type": "tabs",
         "children": [
           {
-            "id": "3ddfbb9a838c2d58",
-            "type": "leaf",
-            "state": {
-              "type": "image",
-              "state": {
-                "file": "image/versionDB1.png"
-              },
-              "icon": "lucide-image",
-              "title": "versionDB1"
-            }
-          },
-          {
             "id": "7ecf9c606edb16c5",
             "type": "leaf",
             "state": {
@@ -33,8 +21,7 @@
               "title": "Ataque de inyección SQL, consultando el tipo y la versión de la base de datos en MySQL y Microsoft"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"

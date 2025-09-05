@@ -10,11 +10,10 @@ Entre prueba y error consigo que la base de datos trae dos columnas, en donde ca
 
 ![alt text](/image/DB_NoOracle3.png)
 ```
-SELECT * FROM information_schema.tables  
+SELECT * FROM information_schema.tables
 SELECT * FROM information_schema.columns WHERE table_name = 'TABLE-NAME-HERE'
 ```
 - `information_schema.tables` → lista todas las tablas.
-    
 - `information_schema.columns` → lista todas las columnas de una tabla concreta.
 - `table_name` → columna de la vista `information_schema.tables` que contiene el **nombre de todas las tablas** de la base de datos.
 
@@ -34,3 +33,4 @@ Utilicé la siguiente carga útil (reemplazando los nombres de tabla y columna) 
 ![alt text](/image/DB_NoOracle8.png)
 ![alt text](/image/DB_NoOracle9.png)
 ![alt text](/image/DB_NoOracle10.png)
+

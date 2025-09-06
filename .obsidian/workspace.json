@@ -34,6 +34,18 @@
             }
           },
           {
+            "id": "a03f89dbeb7843cd",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "image/01.SQL_contenidoTexual.png"
+              },
+              "icon": "lucide-image",
+              "title": "01.SQL_contenidoTexual"
+            }
+          },
+          {
             "id": "84cac9fd5d709a3e",
             "type": "leaf",
             "state": {
@@ -48,7 +60,7 @@
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -195,19 +207,20 @@
   },
   "active": "62f05ed7cf07e3ab",
   "lastOpenFiles": [
+    "BurpSuite/SQL/Ataque de inyección SQL, encontrando una columna con contenido textual.md",
+    "image/07.SQL_contenidoTexual.png",
+    "image/06.SQL_contenidoTexual.png",
+    "image/05.SQL_contenidoTexual.png",
+    "image/04.SQL_contenidoTexual.png",
+    "image/03.SQL_contenidoTexual.png",
+    "image/02.SQL_contenidoTexual.png",
+    "image/01.SQL_contenidoTexual.png",
+    "image/01.ConsultasPorConsola.png",
     "BurpSuite/SQL/Ataque de inyección SQL, listando el contenido de base de datos en Oracle.md",
     "BurpSuite/SQL/Ataque UNION de inyección SQL, determinando el número de columnas devueltas por la consulta.md",
     "image/03.ConsultasPorConsola.png",
     "image/04.ConsultasPorConsola.png",
-    "image/02.ConsultasPorConsola.png",
-    "image/01.ConsultasPorConsola.png",
     "BurpSuite/SQL/Ataque de inyección SQL, listando el contenido de bases de datos que no son Oracle.md",
-    "image/01.DatosOracle.png",
-    "image/02.DatosOracle.png",
-    "image/04.DatosOracle.png",
-    "image/03.DatosOracle.png",
-    "image/06.DatosOracle.png",
-    "image/05.DatosOracle.png",
     "BurpSuite/SQL/Ataque de inyección SQL, consultando el tipo y la versión de la base de datos en Oracle.md",
     "BurpSuite/SQL/Ataque de inyección SQL, consultando el tipo y la versión de la base de datos en MySQL y Microsoft.md",
     "BurpSuite/SQL/Vulnerabilidad de inyección SQL en la cláusula WHERE que permite la recuperación de datos ocultos.md",
@@ -231,7 +244,6 @@
     "HTB/Sherlocks/DFIR/Origins.md",
     "HTB/Maquinas/Alert.md",
     "Nocturnal.md",
-    "HTB/Sherlocks/DFIR/Brutus.md",
     "HTB/Sherlocks/image",
     "HTB/Sherlocks/DFIR",
     "HTB/Sherlocks",

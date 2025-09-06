@@ -72,9 +72,23 @@
               "icon": "lucide-file",
               "title": "Ataque UNION de inyección SQL, recuperando datos de otras tablas"
             }
+          },
+          {
+            "id": "cf51c5f3fe2f7e06",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "BurpSuite/SQL/Ataque UNION de inyección SQL, recuperando múltiples valores en una sola columna.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Ataque UNION de inyección SQL, recuperando múltiples valores en una sola columna"
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -219,27 +233,28 @@
       "command-palette:Abrir paleta de comandos": false
     }
   },
-  "active": "84cac9fd5d709a3e",
+  "active": "cf51c5f3fe2f7e06",
   "lastOpenFiles": [
+    "BurpSuite/SQL/Ataque UNION de inyección SQL, recuperando datos de otras tablas.md",
     "BurpSuite/SQL/Ataque UNION de inyección SQL, determinando el número de columnas devueltas por la consulta.md",
     "BurpSuite/SQL/Ataque de inyección SQL, listando el contenido de bases de datos que no son Oracle.md",
     "BurpSuite/SQL/Ataque de inyección SQL, listando el contenido de base de datos en Oracle.md",
     "BurpSuite/SQL/Ataque de inyección SQL, encontrando una columna con contenido textual.md",
     "BurpSuite/SQL/Ataque de inyección SQL, consultando el tipo y la versión de la base de datos en Oracle.md",
     "BurpSuite/SQL/Ataque de inyección SQL, consultando el tipo y la versión de la base de datos en MySQL y Microsoft.md",
-    "BurpSuite/SQL/Ataque UNION de inyección SQL, recuperando datos de otras tablas.md",
+    "image/01.Valores_UnaColumna.png",
+    "BurpSuite/SQL/Ataque UNION de inyección SQL, recuperando múltiples valores en una sola columna.md",
+    "image/11.Valores_UnaColumna.png",
+    "image/10.Valores_UnaColumna.png",
+    "image/09.Valores_UnaColumna.png",
+    "image/08.Valores_UnaColumna.png",
+    "image/07.Valores_UnaColumna.png",
+    "image/06.Valores_UnaColumna.png",
+    "image/05.Valores_UnaColumna.png",
+    "image/04.Valores_UnaColumna.png",
+    "image/03.Valores_UnaColumna.png",
     "BurpSuite/SQL/Vulnerabilidad de inyección SQL que permite omitir el inicio de sesión.md",
     "BurpSuite/SQL/Vulnerabilidad de inyección SQL en la cláusula WHERE que permite la recuperación de datos ocultos.md",
-    "image/01.Recuperar_DatosTabla.png",
-    "image/13.Recuperar_DatosTabla.png",
-    "image/12.Recuperar_DatosTabla.png",
-    "image/11.Recuperar_DatosTabla.png",
-    "image/10.Recuperar_DatosTabla.png",
-    "image/09.Recuperar_DatosTabla.png",
-    "image/08.Recuperar_DatosTabla.png",
-    "image/07.Recuperar_DatosTabla.png",
-    "image/06.Recuperar_DatosTabla.png",
-    "image/05.Recuperar_DatosTabla.png",
     "image/Pasted.md",
     "BurpSuite/SQL",
     "BurpSuite",
@@ -257,7 +272,6 @@
     "Recursos/Radare2.md",
     "Recursos/Trafico_De_Red.md",
     "HTB/Sherlocks/DFIR/Origins.md",
-    "HTB/Maquinas/Alert.md",
     "HTB/Sherlocks/image",
     "HTB/Sherlocks/DFIR",
     "HTB/Sherlocks",

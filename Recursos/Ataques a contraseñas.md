@@ -84,6 +84,117 @@ ZIP.zip/customers.csv:1234:customers.csv:ZIP.zip::ZIP.zip
 1 password hash cracked, 0 left
 ```
 
+## Cracking de Drives encriptadas de Bitlocker
 
+BitLocker es una característica de encriptación de disco completo desarrollada por Microsoft para el sistema operativo Windows.
 
+```shell
+Asm0o@htb[/htb]$ bitlocker2john -i Backup.vhd > backup.hashes
+Asm0o@htb[/htb]$ grep "bitlocker\$0" backup.hashes > backup.hash
+Asm0o@htb[/htb]$ cat backup.hash
 
+$bitlocker$0$16$02b329c0453b9273f2fc1b927443b5fe$1048576$12$00b0a67f961dd80103000000$60$d59f37e70696f7eab6b8f95ae93bd53f3f7067d5e33c0394b3d8e2d1fdb885cb86c1b978f6cc12ed26de0889cd2196b0510bbcd2a8c89187ba8ec54f
+```
+
+Ya con el hash obtenido es momento de usar Hashcat para crackear la contraseña, el modo asociado en hashcat con bitlocker es -m 22100.
+
+```shell
+Asm0o@htb[/htb]$ hashcat -a 0 -m 22100 '$bitlocker$0$16$02b329c0453b9273f2fc1b927443b5fe$1048576$12$00b0a67f961dd80103000000$60$d59f37e70696f7eab6b8f95ae93bd53f3f7067d5e33c0394b3d8e2d1fdb885cb86c1b978f6cc12ed26de0889cd2196b0510bbcd2a8c89187ba8ec54f' /usr/share/wordlists/rockyou.txt
+
+<SNIP>
+
+$bitlocker$0$16$02b329c0453b9273f2fc1b927443b5fe$1048576$12$00b0a67f961dd80103000000$60$d59f37e70696f7eab6b8f95ae93bd53f3f7067d5e33c0394b3d8e2d1fdb885cb86c1b978f6cc12ed26de0889cd2196b0510bbcd2a8c89187ba8ec54f:1234qwer
+                                                          
+Session..........: hashcat
+Status...........: Cracked
+Hash.Mode........: 22100 (BitLocker)
+Hash.Target......: $bitlocker$0$16$02b329c0453b9273f2fc1b927443b5fe$10...8ec54f
+Time.Started.....: Sat Apr 19 17:49:25 2025 (1 min, 56 secs)
+Time.Estimated...: Sat Apr 19 17:51:21 2025 (0 secs)
+Kernel.Feature...: Pure Kernel
+Guess.Base.......: File (/usr/share/wordlists/rockyou.txt)
+Guess.Queue......: 1/1 (100.00%)
+Speed.#1.........:       25 H/s (9.28ms) @ Accel:64 Loops:4096 Thr:1 Vec:8
+Recovered........: 1/1 (100.00%) Digests (total), 1/1 (100.00%) Digests (new)
+Progress.........: 2880/14344385 (0.02%)
+Rejected.........: 0/2880 (0.00%)
+Restore.Point....: 2816/14344385 (0.02%)
+Restore.Sub.#1...: Salt:0 Amplifier:0-1 Iteration:1044480-1048576
+Candidate.Engine.: Device Generator
+Candidates.#1....: pirate -> soccer9
+Hardware.Mon.#1..: Util:100%
+
+Started: Sat Apr 19 17:49:05 2025
+Stopped: Sat Apr 19 17:51:22 2025
+```
+
+Después de crackear la contraseña con éxito es posible acceder al drive encriptado.
+
+## Montando drives en Linux (o macOS) de Bitlocker encriptado
+
+Es también posible montar drives de bitlocker en OS Linux y MacOS, para hacer esto tendremos que llamar la herramienta dislocker.
+
+```shell
+Asm0o@htb[/htb]$ sudo apt-get install dislocker
+```
+
+Después de esto se debe crear dos carpetas, se usaran para montar el VHD
+
+```shell
+Asm0o@htb[/htb]$ sudo mkdir -p /media/bitlocker
+Asm0o@htb[/htb]$ sudo mkdir -p /media/bitlockermount
+```
+
+Luego se usa losetup para configurar el VHD como un bucle en el dispositivo. Desencripta el drive usando dislocker y finaliza montando el volumen desencriptado.
+
+```shell
+Asm0o@htb[/htb]$ sudo losetup -f -P Backup.vhd
+Asm0o@htb[/htb]$ sudo dislocker /dev/loop0p2 -u1234qwer -- /media/bitlocker
+Asm0o@htb[/htb]$ sudo mount -o loop /media/bitlocker/dislocker-file /media/bitlockermount
+```
+
+Si todo fue hecho correctamente podemos navegar hacia los archivos
+
+```shell
+Asm0o@htb[/htb]$ cd /media/bitlockermount/
+Asm0o@htb[/htb]$ ls -la
+```
+
+Una vez hemos analizado los archivos montados en el drive. Podemos desmontar usando el siguiente comando
+
+```shell
+Asm0o@htb[/htb]$ sudo umount /media/bitlockermount
+Asm0o@htb[/htb]$ sudo umount /media/bitlocker
+```
+
+## Credenciales por defecto
+
+Muchos sistemas, como routers, firewalls, y base de datos vienen con credenciales por defecto. 
+
+```shell
+pip3 install defaultcreds-cheat-sheet
+```
+
+Una vez instalado podemos usar el comando creds para buscar sobre credenciales conocidas asociadas con un producto o vendedor especifico.
+
+```shell
+Asm0o@htb[/htb]$ creds search linksys
+
++---------------+---------------+------------+
+| Product       |    username   |  password  |
++---------------+---------------+------------+
+| linksys       |    <blank>    |  <blank>   |
+| linksys       |    <blank>    |   admin    |
+| linksys       |    <blank>    | epicrouter |
+| linksys       | Administrator |   admin    |
+| linksys       |     admin     |  <blank>   |
+| linksys       |     admin     |   admin    |
+| linksys       |    comcast    |    1234    |
+| linksys       |      root     |  orion99   |
+| linksys       |      user     |  tivonpw   |
+| linksys (ssh) |     admin     |   admin    |
+| linksys (ssh) |     admin     |  password  |
+| linksys (ssh) |    linksys    |  <blank>   |
+| linksys (ssh) |      root     |   admin    |
++---------------+---------------+------------+
+```

